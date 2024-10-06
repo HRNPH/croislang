@@ -11,9 +11,12 @@ def run_croisslang(file_path):
         
         lexer = Lexer(code)
         tokens = lexer.tokenize()
+        print("Successfully tokenized code...")
         parser = Parser(tokens)
         ast = parser.parse()
+        print("Successfully parsed code...")
         
+        print("Baking the croissant...")
         engine = BakingEngine()
         engine.run(ast)
 

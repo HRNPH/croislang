@@ -1,0 +1,5 @@
+Oven<8>
+Prepare <0,0,0,1,1,1,0> into TrayA
+Bake 5
+    Flip TrayA at 6
+Serve TrayA

@@ -1,0 +1,5 @@
+Oven<8>
+Prepare <1,0,1,1> into TrayA
+Prepare <1,1,1,0> into TrayB
+Prepare <0,1,0,1> into TrayC
+Serve TrayC

@@ -37,8 +37,12 @@ class BakingEngine:
             print(f"Combined {tray1} and {tray2} into {result}. New value: {self.trays[result]}")
         elif node.node_type == "Serve":
             print(f"Serving {self.trays[node.value]} from {node.value}.")
-        elif node.node_type == "BakeComplete":
-            print("Baking complete. Taking out from oven!")
+        elif node.node_type == "BakeLoop":
+            times = node.value
+            for _ in range(times):
+                for child in node.children:
+                    self.evaluate(child)
+            print(f"Baked the croissant {times} times.")
 
     def flip_bit(self, croissant, position):
         croissant_list = list(croissant)
@@ -50,6 +54,7 @@ class BakingEngine:
 
     def combine_trays(self, tray1, tray2):
         return "".join(['1' if t1 == '1' or t2 == '1' else '0' for t1, t2 in zip(tray1, tray2)])
+
 
 # Sample run
 if __name__ == "__main__":

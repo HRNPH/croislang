@@ -1,0 +1,6 @@
+Oven<10>
+Prepare <1,0,1,1> into TrayA
+Prepare <0,1,1,0> into TrayB
+Combine TrayA with TrayB into TrayC
+Flip TrayC at 2
+Serve TrayC

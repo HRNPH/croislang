@@ -16,11 +16,13 @@ class Lexer:
 
     def tokenize(self):
         patterns = {
-            "NUMBER": r"\d+",
+            "MEMORY_SIZE": r"Oven<\d+>",   # Matches Oven<8>
+            "BINARY": r"[01]",             # Matches 0 or 1 (binary digits)
+            "NUMBER": r"\d+",              # Matches numbers for positions, etc.
             "IDENTIFIER": r"[A-Za-z_][A-Za-z0-9_]*",
-            "LBRACE": r"<{{{",
-            "RBRACE": r"}}}>",
-            "MEMORY_SIZE": r"Oven<\d+>",
+            "LBRACE": r"<",                # Matches the opening <
+            "RBRACE": r">",                # Matches the closing >
+            "COMMA": r",",                 # Matches commas between binary digits
             "BAKE": r"Bake",
             "FLIP": r"Flip",
             "SHIFT": r"Shift",
@@ -35,10 +37,13 @@ class Lexer:
             "WITH": r"with",
             "AT": r"at",
             "TIMES": r"times",
-            "OUT": r"Take out from oven"
         }
 
         while self.position < len(self.text):
+            if self.text[self.position].isspace():
+                self.position += 1
+                continue
+
             for token_type, pattern in patterns.items():
                 regex = re.compile(pattern)
                 match = regex.match(self.text, self.position)
@@ -48,10 +53,7 @@ class Lexer:
                     self.position += len(value)
                     break
             else:
-                # Skip whitespace
-                if self.text[self.position].isspace():
-                    self.position += 1
-                else:
-                    raise ValueError(f"Unexpected character at position {self.position}")
-        
+                current_char = self.text[self.position]
+                raise ValueError(f"Unexpected character '{current_char}' at position {self.position}")
+
         return self.tokens
